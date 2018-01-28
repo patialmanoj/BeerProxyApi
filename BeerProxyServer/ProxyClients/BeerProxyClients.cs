@@ -13,15 +13,17 @@ namespace BeerProxyServer.ProxyClients
 {
     public class BeerProxyClient : IBeer
     {
-       
+        BeerController beerController = new BeerController();
         private string proxyController = "";
-        
+
         public string Get()
         {
             string serializeResponseInfo = "";
             try
             {
-               
+                proxyController = ConfigurationManager.AppSettings["BeersController"].ToString();
+                BeersResponseInfo beersResponseInfo = beerController.GetAllBeerData(proxyController, "").Result;
+                serializeResponseInfo = JsonConvert.SerializeObject(beersResponseInfo);
             }
             catch (Exception ex)
             {
@@ -36,7 +38,10 @@ namespace BeerProxyServer.ProxyClients
             string serializeResponseInfo = "";
             try
             {
-                
+                proxyController = ConfigurationManager.AppSettings["BeerController"].ToString();
+                BeerResponseInfo beerResponseInfo = beerController.GetBeerData(proxyController, id).Result;
+                // can do massaging if required
+                serializeResponseInfo = JsonConvert.SerializeObject(beerResponseInfo); ;
             }
             catch (Exception ex)
             {
