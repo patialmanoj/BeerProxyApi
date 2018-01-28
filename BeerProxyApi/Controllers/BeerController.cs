@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BeerProxyServer.Interface;
+using BeerProxyServer.ProxyClients;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,15 +12,20 @@ namespace BeerProxyApi.Controllers
     public class BeerController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+
+        IBeer proxyBeerClient = new BeerProxyClient();
+        string serializeResult = "";
+        public string Get()
         {
-            return new string[] { "beer1", "beer2" };
+            serializeResult = proxyBeerClient.Get();
+            return serializeResult;
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "beer";
+            serializeResult = proxyBeerClient.Get(id);
+            return serializeResult;
         }
 
         // POST api/values
