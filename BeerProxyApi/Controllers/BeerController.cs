@@ -7,19 +7,18 @@ using System.Web.Http;
 
 namespace BeerProxyApi.Controllers
 {
-    //[Authorize]
-    public class ValuesController : ApiController
+    public class BeerController : ApiController
     {
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "beer1", "beer2" };
         }
 
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return "beer";
         }
 
         // POST api/values
