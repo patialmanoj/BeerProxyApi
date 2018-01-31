@@ -78,17 +78,28 @@ namespace BeerProxyServer.Utilities
 
            
             URL.Append(apiController);
-            if (id != "")
+            if (id != "" )
             {
-                URL.Append("/" + id);
+                if (id.Contains("?"))
+                {
+                    URL.Append(id);
+                    URL.Append("&key=" + HttpUtility.UrlEncode(_privateKey));
+                }
+                else {
+                    URL.Append("/" + id);
+                    URL.Append("?key=" + HttpUtility.UrlEncode(_privateKey));
+                }
             }
-            //URL += URL + "?key=" + _privateKey;
-            URL.Append("?key=" + HttpUtility.UrlEncode(_privateKey));
+            else
+            {
+                URL.Append("?key=" + HttpUtility.UrlEncode(_privateKey));
 
+            }
+           
             return URL.ToString();
         }
 
-      
+     
         #endregion
     }
 }

@@ -17,4 +17,15 @@ namespace BeerProxyServer.DTO
         [DataMember(Name = "createDate")]
         public string CreateDate { set; get; }
     }
+    [DataContract]
+    public class LabelsInfo
+    {
+        [DataMember(Name = "medium")]
+        public string Medium { set; get; }
+        [DataMember(Name = "large")]
+        public string Large { set; get; }
+        [DataMember(Name = "icon")]
+        public string Icon { set; get; }
+
+    }
 }

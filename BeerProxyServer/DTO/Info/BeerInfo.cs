@@ -43,5 +43,26 @@ namespace BeerProxyServer.DTO
         public string StyleId { get; set; }
         [DataMember(Name = "updateDate")]
         public string UpdateDate { get; set; }
+        [DataMember(Name = "available")]
+        public BeerAvailableInfo Available { set; get; }
+        [DataMember(Name = "availableId")]
+        public Int32 AvailableId { set; get; }
+        [DataMember(Name = "labels")]
+        public LabelsInfo Labels { set; get; }
+
+
     }
+
+    [DataContract]
+    public class BeerAvailableInfo
+    {
+        [DataMember(Name = "description")]
+        public string Description { set; get; }
+        [DataMember(Name = "name")]
+        public string Name { set; get; }
+    }
+
+    
+    
+
 }

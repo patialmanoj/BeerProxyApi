@@ -50,5 +50,27 @@ namespace BeerProxyServer.ProxyClients
             }
             return serializeResponseInfo;
         }
+
+        public string Search(string query , string type)
+        {
+            string serializeResponseInfo = "";
+            string id = "";
+            try
+            {
+                proxyController =  "search";
+                id = "?q=" + query + "&type=" + type;
+                BeerSearchResponseInfo beerResponseInfo = beerController.SearchTheBeer(proxyController, id).Result;
+                // can do massaging if required
+                serializeResponseInfo = JsonConvert.SerializeObject(beerResponseInfo); ;
+
+            }
+            catch(Exception ex)
+            {
+
+                serializeResponseInfo = ex.Message.ToString();
+
+            }
+            return serializeResponseInfo;
+        }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Controller\BeerController.cs" />
     <Compile Include="DTO\BeerRequestInfo\BeerRequestInfo.cs" />
     <Compile Include="DTO\BeerResponseInfo\BeerResponseInfo.cs" />
+    <Compile Include="DTO\BeerResponseInfo\BeerSearchResponseInfo.cs" />
     <Compile Include="DTO\BeerResponseInfo\BeersResponseInfo.cs" />
     <Compile Include="DTO\Info\BeerInfo.cs" />
     <Compile Include="DTO\Info\HexInfo.cs" />

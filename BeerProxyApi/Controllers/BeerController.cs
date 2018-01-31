@@ -27,6 +27,12 @@ namespace BeerProxyApi.Controllers
             serializeResult = proxyBeerClient.Get(id);
             return serializeResult;
         }
+        [HttpGet]
+        public string Search(string query, string type)
+        {
+            serializeResult = proxyBeerClient.Search(query,type);
+            return serializeResult;
+        }
 
         // POST api/values
         public void Post([FromBody]string value)

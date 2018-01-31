@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BeerProxyServer.DTO;
 using System.Net.Http;
 using BeerProxyServer.Utilities;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace BeerProxyServer.Controller
 {
@@ -44,11 +46,11 @@ namespace BeerProxyServer.Controller
 
         }
 
-        // Its working
+        // to fetch data for all the Beers .. subset  
         private async Task<BeersResponseInfo> GetBeersResponse(string proxyController, string id = "")
         {
             BeersResponseInfo beersResponeInfo = null;
-            //string jsonData = null;
+
             try
             {
                 HttpClient client = HttpClientUtility.Client;
@@ -81,6 +83,44 @@ namespace BeerProxyServer.Controller
 
         }
 
+        // to searh the beer details 
+        // id contains --> keyword and type of beer
+        private async Task<BeerSearchResponseInfo> SearchTheBeerForGivenTypeAndKeyWord(string proxyController, string id = "")
+        {
+
+            BeerSearchResponseInfo beerResponeInfo = null;
+            //string jsonData = null;
+            try
+            {
+                HttpClient client = HttpClientUtility.Client;
+                string URI = HttpClientUtility.GetURI(proxyController, id);
+
+
+                using (HttpResponseMessage response = await client.GetAsync(URI).ConfigureAwait(false))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        beerResponeInfo =(BeerSearchResponseInfo)JsonConvert.DeserializeObject<BeerSearchResponseInfo>(responseData);
+
+                        beerResponeInfo = await response.Content.ReadAsAsync<BeerSearchResponseInfo>();
+
+                    }
+                    else
+                    {
+                        beerResponeInfo = new BeerSearchResponseInfo();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return beerResponeInfo;
+
+
+        }
 
         #endregion
 
@@ -101,7 +141,15 @@ namespace BeerProxyServer.Controller
             return result;
         }
 
+        public async Task<BeerSearchResponseInfo> SearchTheBeer(String proxyController, string id)
+        {
+            BeerSearchResponseInfo result = await SearchTheBeerForGivenTypeAndKeyWord(proxyController, id).ConfigureAwait(false);
+            return result;
+
+
+        }
 
         #endregion
     }
 }
+ 

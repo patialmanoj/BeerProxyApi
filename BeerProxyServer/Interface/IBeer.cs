@@ -10,5 +10,6 @@ namespace BeerProxyServer.Interface
     {
         string Get();
         string Get(string id);
+        string Search(string query, string type);
     }
 }

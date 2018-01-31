@@ -26,6 +26,11 @@ namespace BeerProxyApi
                 routeTemplate: "beerapi/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+           // config.Routes.MapHttpRoute(
+           //    name: "Search",
+           //    routeTemplate: "beerapi/{controller}/{action}/{id}"
+           //    //defaults: new { id = RouteParameter.Optional }
+           //);
 
             EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*"); // allsite , headers , methods
             config.EnableCors(cors);
